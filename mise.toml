@@ -1,2 +1,3 @@
 [tools]
+"npm:prh" = "latest"
 prek = "latest"
