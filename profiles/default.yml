@@ -4,3 +4,4 @@ imports:
   - ../vendor/prh-rules/terms/software.yml
   - ../vendor/prh-rules/terms/trademark.yml
   - ../vendor/prh-rules/terms/javascript.yml
+  - ../vendor/prh-rules/media/WEB+DB_PRESS.yml

@@ -1,0 +1,7 @@
+exclude: ^vendor/
+
+repos:
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
