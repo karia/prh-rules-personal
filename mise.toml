@@ -1,3 +1,7 @@
 [tools]
+node = "lts"
 "npm:prh" = "latest"
+"npm:textlint" = "latest"
+# JTF日本語標準スタイルのルールと内蔵辞書
+"npm:textlint-rule-preset-jtf-style" = "latest"
 prek = "latest"
