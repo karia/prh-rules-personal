@@ -1,0 +1,6 @@
+version: 1
+imports:
+  - ../vendor/prh-rules/languages/ja/typo.yml
+  - ../vendor/prh-rules/terms/software.yml
+  - ../vendor/prh-rules/terms/trademark.yml
+  - ../vendor/prh-rules/terms/javascript.yml

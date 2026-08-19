@@ -1,0 +1,3 @@
+[submodule "vendor/prh-rules"]
+	path = vendor/prh-rules
+	url = https://github.com/prh/rules.git
