@@ -29,6 +29,14 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # mise exec は実行するコマンドの CWD をリポジトリルートに移してしまい、
 # 引数に渡された相対パスが解決できなくなる。env で PATH だけ受け取り、CWD は変えない。
-eval "$(mise -C "$repo_root" env -s bash)"
+mise_env="$(mise -C "$repo_root" env -s bash)"
+eval "$mise_env"
+
+# mise exec と違い mise env は未インストールのツールを入れないため、
+# PATH 上の別のツールに落ちる前に弾く。
+if ! command -v "$1" >/dev/null 2>&1; then
+  echo "${1} が入っていません。リポジトリで mise install を実行してください。" >&2
+  exit 1
+fi
 
 exec "$@"
