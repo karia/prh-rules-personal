@@ -5,7 +5,7 @@ usage() {
   cat <<'EOF'
 Usage: check.sh <document_path>...
 
-prh と JTF-style（textlint）をまとめて実行する。自動修正はしない。
+prh・JTF-style・技術文書向けルール（textlint）をまとめて実行する。自動修正はしない。
 指摘が無いチェックは「指摘事項なし」と表示する。
 
 Example:
@@ -54,43 +54,43 @@ fi
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 rules_yml="${repo_root}/profiles/default.yml"
-jtf_script="${repo_root}/scripts/jtf-style.sh"
 
 if [[ ! -f "$rules_yml" ]]; then
   echo "prh ルールが見つかりません: ${rules_yml}" >&2
   exit 1
 fi
 
-if [[ ! -x "$jtf_script" ]]; then
-  echo "JTF-style スクリプトが見つかりません: ${jtf_script}" >&2
-  exit 1
-fi
-
-prh_output=""
-jtf_output=""
-prh_status=0
-jtf_status=0
-
 set +e
 prh_output="$(mise -C "$repo_root" exec -- prh --rules "$rules_yml" "$@" 2>&1)"
 prh_status=$?
-jtf_output="$("$jtf_script" "$@" 2>&1)"
-jtf_status=$?
 set -e
 
+failed=0
 print_result "prh" "$prh_output"
-printf '\n'
-print_result "jtf-style" "$jtf_output"
-
-prh_has_findings=0
-jtf_has_findings=0
-if [[ -n "${prh_output//[$' \t\n\r']/}" ]]; then
-  prh_has_findings=1
-fi
-if [[ -n "${jtf_output//[$' \t\n\r']/}" ]]; then
-  jtf_has_findings=1
+if [[ "$prh_status" -ne 0 || -n "${prh_output//[$' \t\n\r']/}" ]]; then
+  failed=1
 fi
 
-if [[ "$prh_status" -ne 0 || "$jtf_status" -ne 0 || "$prh_has_findings" -ne 0 || "$jtf_has_findings" -ne 0 ]]; then
+for preset in jtf-style ja-technical-writing; do
+  script="${repo_root}/scripts/${preset}.sh"
+  if [[ ! -x "$script" ]]; then
+    echo "スクリプトが見つかりません: ${script}" >&2
+    exit 1
+  fi
+
+  set +e
+  output="$("$script" "$@" 2>&1)"
+  status=$?
+  set -e
+
+  printf '\n'
+  print_result "$preset" "$output"
+
+  if [[ "$status" -ne 0 || -n "${output//[$' \t\n\r']/}" ]]; then
+    failed=1
+  fi
+done
+
+if [[ "$failed" -ne 0 ]]; then
   exit 1
 fi
