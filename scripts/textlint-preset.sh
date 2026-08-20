@@ -30,27 +30,11 @@ if [[ $# -eq 0 ]]; then
   exit 1
 fi
 
-if ! command -v mise >/dev/null 2>&1; then
-  echo "mise が PATH にありません。" >&2
-  exit 1
-fi
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+rules_base_dir="$("${script_dir}/rules-base-dir.sh" "npm:textlint-rule-preset-${preset}")"
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-tool="npm:textlint-rule-preset-${preset}"
-
-if ! preset_root="$(mise -C "$repo_root" where "$tool" 2>/dev/null)"; then
-  echo "${tool} が入っていません。リポジトリで mise install を実行してください。" >&2
-  exit 1
-fi
-
-preset_modules="${preset_root}/node_modules"
-if [[ ! -d "$preset_modules" ]]; then
-  echo "preset の node_modules が見つかりません: ${preset_modules}" >&2
-  exit 1
-fi
-
-exec "${repo_root}/scripts/mise-exec.sh" textlint \
+exec "${script_dir}/mise-exec.sh" textlint \
   --no-textlintrc \
   --preset "$preset" \
-  --rules-base-directory "$preset_modules" \
+  --rules-base-directory "$rules_base_dir" \
   "$@"
