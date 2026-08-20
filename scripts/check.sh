@@ -51,7 +51,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 failed=0
 first=1
-for check in prh jtf-style ja-technical-writing; do
+for check in prh jtf-style ja-technical-writing ja-hiragana no-synonyms; do
   script="${script_dir}/${check}.sh"
   if [[ ! -x "$script" ]]; then
     echo "スクリプトが見つかりません: ${script}" >&2
