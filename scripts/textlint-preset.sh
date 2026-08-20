@@ -49,7 +49,7 @@ if [[ ! -d "$preset_modules" ]]; then
   exit 1
 fi
 
-exec mise -C "$repo_root" exec -- textlint \
+exec "${repo_root}/scripts/mise-exec.sh" textlint \
   --no-textlintrc \
   --preset "$preset" \
   --rules-base-directory "$preset_modules" \
