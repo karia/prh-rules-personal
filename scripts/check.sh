@@ -54,14 +54,20 @@ fi
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 rules_yml="${repo_root}/profiles/default.yml"
+mise_exec="${repo_root}/scripts/mise-exec.sh"
 
 if [[ ! -f "$rules_yml" ]]; then
   echo "prh ルールが見つかりません: ${rules_yml}" >&2
   exit 1
 fi
 
+if [[ ! -x "$mise_exec" ]]; then
+  echo "スクリプトが見つかりません: ${mise_exec}" >&2
+  exit 1
+fi
+
 set +e
-prh_output="$(mise -C "$repo_root" exec -- prh --rules "$rules_yml" "$@" 2>&1)"
+prh_output="$("$mise_exec" prh --rules "$rules_yml" "$@" 2>&1)"
 prh_status=$?
 set -e
 
