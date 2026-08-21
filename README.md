@@ -21,6 +21,8 @@ prh 単体は Markdown を解釈せず、コードブロック・インライン
 
 自作ルールには `specs` を書いてある。prh はルール読み込み時にこれを検証するので、実行のたびに回帰テストが走る。
 
+各ルールには準拠する一般ルールを出典として併記している。主な出典は[公用文作成の考え方（文化審議会建議）](https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/93650001_01.html)と[JTF日本語標準スタイルガイド](https://www.jtf.jp/tips/styleguide)。対応する一般ルールが無いものは「出典なし」と明記している。
+
 単体で動かしたい場合（`--diff` を使いたいときなど）は以下の通り。
 
 ```bash
