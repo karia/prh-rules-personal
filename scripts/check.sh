@@ -74,6 +74,13 @@ for check in prh jtf-style ja-technical-writing ja-hiragana no-synonyms; do
   fi
 done
 
+manual_checks="${script_dir}/../docs/manual-checks.md"
+if [[ -f "$manual_checks" ]]; then
+  printf '\n'
+  printf '%s\n' "==> 目視確認すべき項目"
+  cat "$manual_checks"
+fi
+
 if [[ "$failed" -ne 0 ]]; then
   exit 1
 fi
