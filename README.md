@@ -5,7 +5,10 @@ mise up
 ./scripts/check.sh /path/to/file.md
 ```
 
-prh・JTF-style・技術文書向けルール・ひらがな表記・同義語をまとめて実行する。自動修正はしない。個別に実行する場合は、以下の通り。
+prh・JTF-style・技術文書向けルール・ひらがな表記・同義語をまとめて実行する。自動修正はしない。
+最後に [docs/manual-checks.md](docs/manual-checks.md) を出力する。機械的に検出できない項目を、生成AIに読ませて指摘させるため。
+
+個別に実行する場合は、以下の通り。
 
 ## prh
 
@@ -13,12 +16,15 @@ prh・JTF-style・技術文書向けルール・ひらがな表記・同義語�
 ./scripts/prh.sh /path/to/file.md
 ```
 
-[textlint-rule-prh](https://github.com/textlint-ja/textlint-rule-prh) 経由で実行する。
+[textlint-rule-prh](https://github.com/textlint-ja/textlint-rule-prh) 経由で、[prh/rules](https://github.com/prh/rules) と自作の [profiles/karia.yml](profiles/karia.yml) を読ませる。
 prh 単体は Markdown を解釈せず、コードブロック・インラインコード・URL の中まで指摘してしまうため。
+
+自作ルールには `specs` を書いてある。prh はルール読み込み時にこれを検証するので、実行のたびに回帰テストが走る。
+
 単体で動かしたい場合（`--diff` を使いたいときなど）は以下の通り。
 
 ```bash
-./scripts/mise-exec.sh prh --diff --rules profiles/default.yml /path/to/file.md
+./scripts/mise-exec.sh prh --diff --rules profiles/default.yml --rules profiles/karia.yml /path/to/file.md
 ```
 
 ## textlint
