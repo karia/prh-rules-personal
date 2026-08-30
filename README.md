@@ -6,7 +6,7 @@ mise up
 ```
 
 prh・JTF-style・技術文書向けルール・ひらがな表記・同義語をまとめて実行する。自動修正はしない。
-最後に [docs/manual-checks.md](docs/manual-checks.md) を出力する。機械的に検出できない項目を、生成AIに読ませて指摘させるため。
+最後に [docs/manual-checks.md](docs/manual-checks.md) を出力する。自動チェックで埋まらない項目を、生成AIに読ませて指摘させるため。
 
 個別に実行する場合は、以下の通り。
 
