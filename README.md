@@ -6,7 +6,7 @@ mise up
 ```
 
 prh・JTF-style・技術文書向けルール・ひらがな表記・同義語をまとめて実行する。自動修正はしない。
-最後に [docs/manual-checks.md](docs/manual-checks.md) を出力する。機械的に検出できない項目を、生成AIに読ませて指摘させるため。
+最後に [docs/manual-checks.md](docs/manual-checks.md) を出力する。自動チェックで埋まらない項目を、生成AIに読ませて指摘させるため。
 
 個別に実行する場合は、以下の通り。
 
@@ -20,6 +20,8 @@ prh・JTF-style・技術文書向けルール・ひらがな表記・同義語�
 prh 単体は Markdown を解釈せず、コードブロック・インラインコード・URL の中まで指摘してしまうため。
 
 自作ルールには `specs` を書いてある。prh はルール読み込み時にこれを検証するので、実行のたびに回帰テストが走る。
+
+各ルールには検出範囲の種別も併記している。パターンのルールは原理に反する箇所を全て捉えるが、辞書のルールは登録した語しか捉えない。取りこぼしは [docs/manual-checks.md](docs/manual-checks.md) で拾う。
 
 各ルールには準拠する一般ルールを出典として併記している。主な出典は[公用文作成の考え方（文化審議会建議）](https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/93650001_01.html)と[JTF日本語標準スタイルガイド](https://www.jtf.jp/tips/styleguide)。対応する一般ルールが無いものは「出典なし」と明記している。
 
