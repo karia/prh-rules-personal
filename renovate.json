@@ -1,16 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "github>karia/renovate-config"
   ],
   "dependencyDashboard": true,
-  "timezone": "Asia/Tokyo",
   "pinDigests": true,
   "automerge": false,
-  "prHourlyLimit": 0,
-  "schedule": [
-    "* 18-23 * * *"
-  ],
   "packageRules": [
     {
       "description": "Group non-major GitHub Actions updates",
