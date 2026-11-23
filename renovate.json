@@ -4,7 +4,9 @@
     "config:recommended",
     "github>karia/renovate-config"
   ],
-  "dependencyDashboard": true,
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "pinDigests": true,
   "automerge": false
 }
