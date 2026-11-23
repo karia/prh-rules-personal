@@ -6,18 +6,5 @@
   ],
   "dependencyDashboard": true,
   "pinDigests": true,
-  "automerge": false,
-  "packageRules": [
-    {
-      "description": "Group non-major GitHub Actions updates",
-      "matchManagers": [
-        "github-actions"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "groupName": "GitHub Actions non-major updates"
-    }
-  ]
+  "automerge": false
 }
